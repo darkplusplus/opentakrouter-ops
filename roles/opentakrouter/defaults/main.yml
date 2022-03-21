@@ -1,0 +1,38 @@
+---
+otr_root_dir: "/opt/otr"
+otr_user: "otr"
+
+version: "1.0.6"
+hash: "12b4d6d15e5cc7a0c237ce90dcb3c7bb2c6b48cf"
+otr_artifact_url: "https://github.com/darkplusplus/opentakrouter/releases/download/v{{ version }}/opentakrouter-v{{ version }}-{{ hash }}.tar.gz"
+
+node_name: inventory_hostname
+
+###
+config:
+  AllowedHosts: "*"
+  server:
+    data: "{{ otr_root_dir}}"
+    name: "{{ node_name | default(inventory_hostname) }}"
+    api:
+      port: 8080
+      swagger: true
+      ssl: false
+      cert: server.p12
+      passphrase: atakatak
+    websockets:
+      enabled: true
+      port: 5000
+      ssl: false
+      cert: server.p12
+      passphrase: atakatak
+    tak:
+      tcp:
+        enabled: true
+        port: 8087
+      tls:
+        enabled: false
+        port: 8089
+        cert: server.p12
+        passphrase: atakatak
+    

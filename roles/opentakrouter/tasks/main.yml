@@ -1,0 +1,52 @@
+---
+- name: Ensure group for service user
+  ansible.builtin.group:
+    name: "{{ otr_user }}"
+    state: present
+  become: yes
+
+- name: Ensure service user
+  ansible.builtin.user:
+    name: "{{ otr_user }}"
+    groups: "{{ otr_user }}"
+    shell: /bin/nologin
+    system: true
+    state: present
+  become: yes
+
+- name: Deploy artifacts
+  ansible.builtin.unarchive:
+    src: "{{ otr_artifact_url }}"
+    dest: "{{ otr_root_dir }}"
+    exclude: 
+      - "{{ otr_root_dir }}/opentakrouter.db"
+      - "{{ otr_root_dir }}/opentakrouter.json"
+    remote_src: yes
+    owner: "{{ otr_user }}"
+    group: "{{ otr_user }}"
+  become: yes
+  notify:
+    - restart opentakrouter
+  
+- name: Deploy service
+  ansible.builtin.template:
+    src: opentakrouter.service.j2
+    dest: /etc/systemd/system/opentakrouter.service
+  become: yes
+  notify:
+    - restart opentakrouter
+
+- name: Deploy configuration
+  ansible.builtin.template:
+    src: opentakrouter.json.j2
+    dest: "{{ otr_root_dir }}/opentakrouter.json"
+  become: yes
+  notify:
+    - restart opentakrouter
+
+- name: Ensure service state
+  ansible.builtin.service:
+    name: opentakrouter
+    enabled: yes
+    state: started
+  become: yes

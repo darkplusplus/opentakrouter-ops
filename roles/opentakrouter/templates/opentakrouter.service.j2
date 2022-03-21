@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenTakRouter service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User={{ otr_user }}
+ExecStart={{ otr_root_dir }}/opentakrouter
+
+[Install]
+WantedBy=multi-user.target

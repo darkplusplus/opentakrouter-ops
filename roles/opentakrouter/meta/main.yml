@@ -1,0 +1,9 @@
+galaxy_info:
+  author: greg <greg@darkplusplus.com>
+  description: deploy and instance of opentakrouter
+  company: darkplusplus
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  galaxy_tags: []
+
+dependencies: []
