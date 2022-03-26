@@ -11,6 +11,6 @@ This assumes using deploying a new server on ec2 and you already have ansible in
 2. Update the `hosts` inventory file with your ec2 instance name.
 3. Run the playbook. This might look like:
 ```
-$ ansible-playbook -i hosts site.yml --private-key ~/.ssh/foo.pem
+$ ansible-playbook -i hosts site.yml -u ec2-user --private-key ~/.ssh/foo.pem
 ```
 4. Browse to the admin page on port 8080.
