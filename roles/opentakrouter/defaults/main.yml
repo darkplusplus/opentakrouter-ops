@@ -2,9 +2,9 @@
 otr_root_dir: "/opt/otr"
 otr_user: "otr"
 
-version: "1.0.6"
-hash: "12b4d6d15e5cc7a0c237ce90dcb3c7bb2c6b48cf"
-otr_artifact_url: "https://github.com/darkplusplus/opentakrouter/releases/download/v{{ version }}/opentakrouter-v{{ version }}-{{ hash }}.tar.gz"
+version: "1.0.8"
+arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'x64' }}"
+otr_artifact_url: "https://github.com/darkplusplus/opentakrouter/releases/download/v{{ version }}/opentakrouter-v{{ version }}-linux-{{ arch }}.tar.gz"
 
 node_name: inventory_hostname
 
