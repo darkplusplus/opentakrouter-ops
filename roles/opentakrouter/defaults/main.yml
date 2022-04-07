@@ -2,7 +2,7 @@
 otr_root_dir: "/opt/otr"
 otr_user: "otr"
 
-version: "1.0.12"
+version: "1.0.15"
 arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'x64' }}"
 otr_artifact_url: "https://github.com/darkplusplus/opentakrouter/releases/download/v{{ version }}/opentakrouter-v{{ version }}-linux-{{ arch }}.tar.gz"
 
